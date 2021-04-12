@@ -1,0 +1,16 @@
+.vscode/**
+.vscode-test/**
+out/**
+src/**
+.gitignore
+.yarnrc
+**/tsconfig.json
+**/*.map
+**/*.ts
+**/*.txt
+**/*.yaml
+.prettierrc
+tsconfig.json
+.eslintrc
+.eslintignore
+images/**/*.svg
