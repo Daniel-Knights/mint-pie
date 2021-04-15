@@ -1,6 +1,10 @@
 import { ExtensionContext } from 'vscode'
-import Completion from './completion'
+import CompletionProvider from './completion'
+import ColorProvider from './color'
+// import FormattingProvider from './format'
 
 export function activate(context: ExtensionContext): void {
-  new Completion(context.subscriptions)
+  new CompletionProvider(context.subscriptions)
+  new ColorProvider(context.subscriptions)
+  // new FormattingProvider(context.subscriptions)
 }
