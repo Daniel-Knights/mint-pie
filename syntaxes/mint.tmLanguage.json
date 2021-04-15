@@ -184,12 +184,12 @@
       ]
     },
     "directives": {
-      "begin": "(@(svg|format|documentation))((\\().*\\))?",
+      "begin": "(@(?:asset|svg|format|documentation))(\\(.*\\))?",
       "beginCaptures": {
         "0": {
           "name": "keyword.directive.mint",
           "patterns": [
-            { "match": "(?<=@svg\\()[^\\)]*", "name": "string.unquoted.mint" },
+            { "match": "(?<=@(?:asset|svg)\\()[^\\)]*", "name": "string.unquoted.mint" },
             {
               "match": "(?<=@documentation\\()[^\\)]*",
               "name": "entity.name.class.mint"
@@ -200,13 +200,13 @@
       "end": "\\G"
     },
     "html": {
-      "begin": "<{?",
+      "begin": "<",
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.tag.html.mint"
         }
       },
-      "end": "}?>",
+      "end": ">",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.tag.html.mint"
@@ -475,13 +475,13 @@
       ]
     },
     "style": {
-      "begin": "(?<=style\\s)[^{]*\\s{",
+      "begin": "(?<=style\\s)\\s*[^{]+{",
       "beginCaptures": {
         "0": {
           "name": "meta.block.open.style.mint",
           "patterns": [
             {
-              "begin": "\\(",
+              "begin": "\\s*\\(",
               "end": "\\)",
               "patterns": [{ "include": "#keywords" }],
               "name": "punctuation.params.style.mint"
