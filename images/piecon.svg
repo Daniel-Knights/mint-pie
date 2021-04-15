@@ -1,4 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="5 5 90 90" class="iconLeft">
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="5 5 90 90"
+  class="iconLeft"
+>
   <defs>
     <linearGradient
       gradientTransform="rotate(25)"
@@ -8,8 +12,16 @@
       x2="100%"
       y2="0%"
     >
-      <stop offset="0%" stop-color="#37C060" stop-opacity="1"></stop>
-      <stop offset="100%" stop-color="#10B4F3" stop-opacity="1"></stop>
+      <stop
+        offset="0%"
+        stop-color="#37C060"
+        stop-opacity="1"
+      ></stop>
+      <stop
+        offset="100%"
+        stop-color="#10B4F3"
+        stop-opacity="1"
+      ></stop>
     </linearGradient>
   </defs>
   <g
