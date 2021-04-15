@@ -29,9 +29,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onLanguage:mint",
-    "workspaceContains:**/*.mint",
-    "onCommand:mint.init"
+    "onLanguage:mint"
   ],
   "main": "./dist/extension.js",
   "contributes": {
