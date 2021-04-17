@@ -1,80 +1,28 @@
 {
-  "fun": {
-    "prefix": "fun",
-    "body": ["fun ${1:name} : ${2:String} {", "\t$3", "}"],
-    "description": "Mint function block"
+  "@asset": {
+    "prefix": "@asset",
+    "body": "@asset(../$1)",
+    "description": "Allows you to reference a file relative to the current file"
   },
-  "style": {
-    "prefix": "style",
-    "body": ["style ${1:name} {", "\t$2", "}"],
-    "description": "Mint style block"
+  "@documentation": {
+    "prefix": "@documentation",
+    "body": "decoded = decode @documentation(${1:Main}) as ${2:Component}",
+    "description": "Compiles the JSON documentation of the given entity into JavaScript code so it can be used to display information about that entity"
   },
-  "connect": {
-    "prefix": "connect",
-    "body": ["connect ${1:Store} exposing { ${2:state} }"],
-    "description": "Connecting to a Mint store allows you to access any state values it contains"
-  },
-  "component": {
-    "prefix": "component",
+  "@format": {
+    "prefix": "@format",
     "body": [
-      "component ${1:Name} {",
-      "\tfun render : Html {",
-      "\t\t<div>$2</div>",
-      "\t}",
-      "}"
+      "{result, code} =",
+      "\t@format {",
+      "\t\t${1:<div>${2:\"Text\"}</div>}",
+      "\t}"
     ],
-    "description": "Mint component"
+    "description": "Returns the formatted string version of the code it's given and the result of the code in a tuple: Tuple(a, String)"
   },
-  "global component": {
-    "prefix": "global component",
-    "body": [
-      "global component ${1:Name} {",
-      "\tfun render : Html {",
-      "\t\t<div>$2</div>",
-      "\t}",
-      "}"
-    ],
-    "description": "Mint global components are: globally accessible, only rendered once and rendered automatically alongside the Main component"
-  },
-  "store": {
-    "prefix": "store",
-    "body": ["store ${1:Name} {", "\t$2", "}"],
-    "description": "Mint store for handling application state"
-  },
-  "record": {
-    "prefix": "record",
-    "body": ["record ${1:Name} {", "\t${2:prop} : ${3:String},$4", "}"],
-    "description": "Mint data structure with a fixed set of keys"
-  },
-  "enum": {
-    "prefix": "enum",
-    "body": ["enum ${1:Name} {", "\t${2:Variant}", "}"],
-    "description": "A Mint enum describes data which contains different type-variants"
-  },
-  "routes": {
-    "prefix": "routes",
-    "body": ["routes {", "\t/$2 {", "\t\t$1", "\t}", "}"],
-    "description": "Mint routes block for defining routes and setting their state"
-  },
-  "for": {
-    "prefix": "for",
-    "body": ["for (${1:item} of ${2:iterable}) {", "\t$3", "}"],
-    "description": "Mint for...of loop"
-  },
-  "if": {
-    "prefix": "if",
-    "body": ["if (${1:condition})", "\t$2", "}"],
-    "description": "Mint if block"
-  },
-  "else if": {
-    "prefix": "else if",
-    "body": ["else if (${1:condition}) {", "\t$2", "}"],
-    "description": "Mint else if block"
-  },
-  "else": {
-    "prefix": "else",
-    "body": ["else {", "\t$1", "}"],
-    "description": "Mint else block"
+  "@svg": {
+    "prefix": "@svg",
+    "body": "@svg(../$1)",
+    "description": "Allows you to inline an SVG file as HTML"
   },
   "case": {
     "prefix": "case",
@@ -86,97 +34,26 @@
     ],
     "description": "Mint case block"
   },
-  "module": {
-    "prefix": "module",
-    "body": [
-      "module ${1:Name} {",
-      "\tfun ${2:name} (${3:param} : ${4:String}) : ${5:String} {",
-      "\t$6",
-      "\t}",
-      "}"
-    ],
-    "description": "A Mint module is a container for a set of relatable functions"
-  },
-  "const": {
-    "prefix": "const",
-    "body": "const ${1:CONST_NAME} = $2",
-    "description": "Mint constant"
-  },
-  "try": {
-    "prefix": "try",
-    "body": ["try {", "\t$1", "} catch ${2:ErrorType} => ${3:error} {", "\t$4", "}"],
-    "description": "Mint try block"
-  },
-  "sequence": {
-    "prefix": "sequence",
-    "body": ["sequence {", "\t$1", "}"],
-    "description": "A Mint sequence block runs asynchronous code in sequence"
-  },
-  "parallel": {
-    "prefix": "parallel",
-    "body": ["parallel {", "\t$1", "}"],
-    "description": "A Mint parallel block runs asynchronous code in parallel"
-  },
-  "then": {
-    "prefix": "then",
-    "body": ["then {", "\t$1", "}"],
-    "description": "Mint then block for handling the results of an asynchronous task"
-  },
   "catch": {
     "prefix": "catch",
     "body": ["catch ${1:ErrorType} => ${3:error} {", "\t$2", "}"],
     "description": "Mint catch block for handling errors"
-  },
-  "finally": {
-    "prefix": "finally",
-    "body": ["finally {", "\t$1", "}"],
-    "description": "Mint finally block for running code after an asynchronous block has executed"
-  },
-  "where": {
-    "prefix": "where",
-    "body": ["where {", "\t$1", "}"],
-    "description": "Mint where block"
-  },
-  "when": {
-    "prefix": "when",
-    "body": ["when {", "\t${1:value} == ${2:value}", "}"],
-    "description": "A Mint when block runs code in a for...of loop only when the given condition is met"
-  },
-  "next": {
-    "prefix": "next",
-    "body": "next { ${1:state} = ${2:value} }",
-    "description": "A Mint next expression allows you to set state within a store or component"
-  },
-  "property": {
-    "prefix": "property",
-    "body": "property ${1:name} : ${2:String} = ${3:value}",
-    "description": "Mint property for passing values to components, omitting a default value makes it required"
-  },
-  "get": {
-    "prefix": "get",
-    "body": ["get ${1:name} : ${2:String} {", "\t$3", "}"],
-    "description": "The get keyword defines a computed property in Mint"
   },
   "children": {
     "prefix": "children",
     "body": "property children : Array(Html) = []",
     "description": "Access child elements which are passed to a Mint component"
   },
-  "use provider": {
-    "prefix": "use provider",
+  "component": {
+    "prefix": "component",
     "body": [
-      "use Provider.${1:Tick} {",
-      "\t${2:ticks} = () : Promise(Never, Void) {",
-      "\t\tnext { ${3:counter} = ${3:counter} + 1 }",
+      "component ${1:Name} {",
+      "\tfun render : Html {",
+      "\t\t<div>$2</div>",
       "\t}",
       "}"
     ],
-    "description": "A Mint Provider represents a source of asynchronous events. To subscribe to a Provider, you use it and pass it a record that contains the subscription data"
-  },
-  "state": {
-    "prefix": "state",
-    "body": "state ${1:name} : ${2:String} = ${3:value}",
-    "description": "Define store or component state in Mint"
+    "description": "Mint component"
   },
   "componentDidMount": {
     "prefix": "fun componentDidMount",
@@ -193,39 +70,162 @@
     "body": ["fun componentWillUnmount : Promise(Never, Void) {", "$1", "}"],
     "description": "Mint lifecycle function"
   },
-  "@asset": {
-    "prefix": "@asset",
-    "body": "@asset(../$1)",
-    "description": "Allows you to reference a file relative to the current file"
+  "connect": {
+    "prefix": "connect",
+    "body": ["connect ${1:Store} exposing { ${2:state} }"],
+    "description": "Connecting to a Mint store allows you to access any state values it contains"
   },
-  "@svg": {
-    "prefix": "@svg",
-    "body": "@svg(../$1)",
-    "description": "Allows you to inline an SVG file as HTML"
-  },
-  "@format": {
-    "prefix": "@format",
-    "body": [
-      "{result, code} =",
-      "\t@format {",
-      "\t\t${1:<div>${2:\"Text\"}</div>}",
-      "\t}"
-    ],
-    "description": "Returns the formatted string version of the code it's given and the result of the code in a tuple: Tuple(a, String)"
-  },
-  "@documentation": {
-    "prefix": "@documentation",
-    "body": "decoded = decode @documentation(${1:Main}) as ${2:Component}",
-    "description": "Compiles the JSON documentation of the given entity into JavaScript code so it can be used to display information about that entity"
+  "const": {
+    "prefix": "const",
+    "body": "const ${1:CONST_NAME} = $2",
+    "description": "Mint constant"
   },
   "decode": {
     "prefix": "decode",
     "body": "decode ${1:value} as ${2:Type}",
     "description": "Decode JS data to be used in Mint"
   },
+  "else if": {
+    "prefix": "else if",
+    "body": ["else if (${1:condition}) {", "\t$2", "}"],
+    "description": "Mint else if block"
+  },
+  "else": {
+    "prefix": "else",
+    "body": ["else {", "\t$1", "}"],
+    "description": "Mint else block"
+  },
   "encode": {
     "prefix": "encode",
     "body": "encode { ${1:variable} = ${2:\"value\"} }",
     "description": "Encode Mint data to be used in JS"
+  },
+  "enum": {
+    "prefix": "enum",
+    "body": ["enum ${1:Name} {", "\t${2:Variant}", "}"],
+    "description": "A Mint enum describes data which contains different type-variants"
+  },
+  "finally": {
+    "prefix": "finally",
+    "body": ["finally {", "\t$1", "}"],
+    "description": "Mint finally block for running code after an asynchronous block has executed"
+  },
+  "for": {
+    "prefix": "for",
+    "body": ["for (${1:item} of ${2:iterable}) {", "\t$3", "}"],
+    "description": "Mint for...of loop"
+  },
+  "fun": {
+    "prefix": "fun",
+    "body": ["fun ${1:name} : ${2:String} {", "\t$3", "}"],
+    "description": "Mint function block"
+  },
+  "get": {
+    "prefix": "get",
+    "body": ["get ${1:name} : ${2:String} {", "\t$3", "}"],
+    "description": "The get keyword defines a computed property in Mint"
+  },
+  "global component": {
+    "prefix": "global component",
+    "body": [
+      "global component ${1:Name} {",
+      "\tfun render : Html {",
+      "\t\t<div>$2</div>",
+      "\t}",
+      "}"
+    ],
+    "description": "Mint global components are: globally accessible, only rendered once and rendered automatically alongside the Main component"
+  },
+  "if": {
+    "prefix": "if",
+    "body": ["if (${1:condition})", "\t$2", "}"],
+    "description": "Mint if block"
+  },
+  "module": {
+    "prefix": "module",
+    "body": [
+      "module ${1:Name} {",
+      "\tfun ${2:name} (${3:param} : ${4:String}) : ${5:String} {",
+      "\t$6",
+      "\t}",
+      "}"
+    ],
+    "description": "A Mint module is a container for a set of relatable functions"
+  },
+  "next": {
+    "prefix": "next",
+    "body": "next { ${1:state} = ${2:value} }",
+    "description": "A Mint next expression allows you to set state within a store or component"
+  },
+  "parallel": {
+    "prefix": "parallel",
+    "body": ["parallel {", "\t$1", "}"],
+    "description": "A Mint parallel block runs asynchronous code in parallel"
+  },
+  "property": {
+    "prefix": "property",
+    "body": "property ${1:name} : ${2:String} = ${3:value}",
+    "description": "Mint property for passing values to components, omitting a default value makes it required"
+  },
+  "record": {
+    "prefix": "record",
+    "body": ["record ${1:Name} {", "\t${2:prop} : ${3:String},$4", "}"],
+    "description": "Mint data structure with a fixed set of keys"
+  },
+  "routes": {
+    "prefix": "routes",
+    "body": ["routes {", "\t/$2 {", "\t\t$1", "\t}", "}"],
+    "description": "Mint routes block for defining routes and setting their state"
+  },
+  "sequence": {
+    "prefix": "sequence",
+    "body": ["sequence {", "\t$1", "}"],
+    "description": "A Mint sequence block runs asynchronous code in sequence"
+  },
+  "state": {
+    "prefix": "state",
+    "body": "state ${1:name} : ${2:String} = ${3:value}",
+    "description": "Define store or component state in Mint"
+  },
+  "store": {
+    "prefix": "store",
+    "body": ["store ${1:Name} {", "\t$2", "}"],
+    "description": "Mint store for handling application state"
+  },
+  "style": {
+    "prefix": "style",
+    "body": ["style ${1:name} {", "\t$2", "}"],
+    "description": "Mint style block"
+  },
+  "then": {
+    "prefix": "then",
+    "body": ["then {", "\t$1", "}"],
+    "description": "Mint then block for handling the results of an asynchronous task"
+  },
+  "try": {
+    "prefix": "try",
+    "body": ["try {", "\t$1", "} catch ${2:ErrorType} => ${3:error} {", "\t$4", "}"],
+    "description": "Mint try block"
+  },
+  "use provider": {
+    "prefix": "use provider",
+    "body": [
+      "use Provider.${1:Tick} {",
+      "\t${2:ticks} = () : Promise(Never, Void) {",
+      "\t\tnext { ${3:counter} = ${3:counter} + 1 }",
+      "\t}",
+      "}"
+    ],
+    "description": "A Mint Provider represents a source of asynchronous events. To subscribe to a Provider, you use it and pass it a record that contains the subscription data"
+  },
+  "when": {
+    "prefix": "when",
+    "body": ["when {", "\t${1:value} == ${2:value}", "}"],
+    "description": "A Mint when block runs code in a for...of loop only when the given condition is met"
+  },
+  "where": {
+    "prefix": "where",
+    "body": ["where {", "\t$1", "}"],
+    "description": "Mint where block"
   }
 }
