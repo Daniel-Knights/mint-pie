@@ -162,19 +162,22 @@ export function isWithinStyleBlock(document: TextDocument, position: Position): 
  * e.g. if we type this: `background-c` and focus away before selecting a completion,
  * the provider will autocomplete `background-background-color` without making this determination.
  */
-export function hasExistingHyphen(lineText: string, matchText: string): string {
-  const hyphenSections = lineText.match(/[^\s]*-/g)
+export function hasExistingHyphen(
+  document: TextDocument,
+  position: Position,
+  body: string
+): string {
+  const range = document.getWordRangeAtPosition(position, /(?:\w|-)+\w*/)
+  const typedText = document.getText(range)
 
-  if (!hyphenSections) return matchText
+  if (!typedText || !range) return body
 
-  for (let i = 0; i < hyphenSections.length; i++) {
-    const section = hyphenSections[i]
-    const matchingLengthBody = matchText.slice(0, section.length)
+  const typedTextAtLastHyphen = typedText.slice(0, typedText.lastIndexOf('-') + 1)
+  const matchingLengthBody = body.slice(0, typedText.lastIndexOf('-') + 1)
 
-    if (section === matchingLengthBody) {
-      return matchText.split(section)[1]
-    }
+  if (typedTextAtLastHyphen === matchingLengthBody) {
+    return body.slice(typedText.lastIndexOf('-') + 1)
   }
 
-  return matchText
+  return body
 }
