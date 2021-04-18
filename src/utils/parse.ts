@@ -1,22 +1,23 @@
 import { TextDocument, Position } from 'vscode'
+import { Delimiters } from '../typings'
 import regex from '../resources/regex'
 
 /**
- * Recursively match nested boundaries.
+ * Recursively match nested delimiters.
  *
  * Adapted from https://blog.stevenlevithan.com/archives/javascript-match-nested
  *
- * @param boundaries - 2-character pair of delimiters, i.e. `'{}'`
+ * @param delimiters - 2-character pair of delimiters
  */
-export function matchRecursive(matchString: string, boundaries: string): string {
-  const iterator = new RegExp(`${boundaries[0]}|${boundaries[1]}`, 'g')
+export function matchRecursive(matchString: string, delimiters: Delimiters): string {
+  const iterator = new RegExp(`${delimiters.open}|${delimiters.close}`, 'g')
 
   let openTokens = 0
   let matchStartIndex
   let match
 
   while ((match = iterator.exec(matchString))) {
-    if (match[0] === boundaries[0]) {
+    if (match[0] === delimiters.open) {
       if (!openTokens) {
         matchStartIndex = iterator.lastIndex
       }
@@ -66,16 +67,16 @@ export function isWithinRegexMatch(
 }
 
 /**
- * Uses `startRegex` to carve up the document, then tests if the given position is between two boundaries.
+ * Uses `startRegex` to carve up the document, then tests if the given position is between two delimiters.
  *
- * @param startRegex - e.g. `fun\s*[^:|{]*:\s*Html\s*(?={)`, starting boundary mustn't be included
- * @param boundaries - 2-character pair of delimiters, e.g. `'{}'`
+ * @param startRegex - e.g. `fun\s*[^:|{]*:\s*Html\s*(?={)`, **starting boundary mustn't be included**
+ * @param delimiters - 2-character pair of delimiters, e.g. `'{}'`
  */
 export function isWithinMultilineDelimiters(
   document: TextDocument,
   position: Position,
   startRegex: RegExp,
-  boundaries: string
+  delimiters: Delimiters
 ): boolean {
   const docText = document.getText()
   const carvedDocText = docText.split(startRegex)
@@ -83,9 +84,9 @@ export function isWithinMultilineDelimiters(
   carvedDocText.shift()
 
   const blockMatches = carvedDocText.map((section) => {
-    const matchText = `${boundaries[0]}${section}${boundaries[1]}}`
+    const matchText = `${delimiters.open}${section}${delimiters.close}}`
 
-    return matchRecursive(matchText, boundaries)
+    return matchRecursive(matchText, delimiters)
   })
 
   if (!blockMatches) return false
@@ -146,14 +147,20 @@ export function isWithinTags(
  * Determines if the given position is within a block typed to return HTML.
  */
 export function isWithinHtmlBlock(document: TextDocument, position: Position): boolean {
-  return isWithinMultilineDelimiters(document, position, regex.htmlFunOpening, '{}')
+  return isWithinMultilineDelimiters(document, position, regex.htmlFunOpening, {
+    open: '{',
+    close: '}',
+  })
 }
 
 /**
  * Determines if the given position is within a style block.
  */
 export function isWithinStyleBlock(document: TextDocument, position: Position): boolean {
-  return isWithinMultilineDelimiters(document, position, regex.styleBlockOpening, '{}')
+  return isWithinMultilineDelimiters(document, position, regex.styleBlockOpening, {
+    open: '{',
+    close: '}',
+  })
 }
 
 /**
