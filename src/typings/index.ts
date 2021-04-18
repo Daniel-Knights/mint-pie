@@ -1,3 +1,5 @@
+export type ColorConversionFunction = (match: RegExpMatchArray) => RGBA | void
+
 /**
  * @property `r`: `number`
  * @property `g`: `number`
@@ -10,8 +12,6 @@ export interface RGBA {
   b: number
   a: number
 }
-
-export type ColorConversionFunction = (match: RegExpMatchArray) => RGBA | void
 
 /**
  * @property `prefix`: `string`
