@@ -49,7 +49,9 @@
     "body": [
       "component ${1:Name} {",
       "\tfun render : Html {",
-      "\t\t<div>$2</div>",
+      "\t\t<div>",
+      "\t\t\t$2",
+      "\t\t</div>",
       "\t}",
       "}"
     ],
@@ -130,7 +132,9 @@
     "body": [
       "global component ${1:Name} {",
       "\tfun render : Html {",
-      "\t\t<div>$2</div>",
+      "\t\t<div>",
+      "\t\t\t$2",
+      "\t\t</div>",
       "\t}",
       "}"
     ],
