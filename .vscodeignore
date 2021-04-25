@@ -14,3 +14,4 @@ tsconfig.json
 .eslintrc
 .eslintignore
 images/**/*.svg
+images/**/*.gif
