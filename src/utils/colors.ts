@@ -1,6 +1,8 @@
 import { Color } from 'vscode'
-import type { RGBA } from '../typings'
 import colors from '../resources/colors'
+
+export type ColorConversionFunction = (match: RegExpMatchArray) => RGBA | void
+export type RGBA = { r: number; g: number; b: number; a: number }
 
 export function colorToRGBA(rgba: Color): string {
   const { red, green, blue, alpha } = rgba

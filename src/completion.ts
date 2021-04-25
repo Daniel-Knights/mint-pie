@@ -16,7 +16,12 @@ import {
   hasExistingHyphen,
 } from './utils/parse'
 import { tagAttributes, cssProperties, htmlTags } from './snippets'
-import type { Snippet } from './typings'
+
+type Snippet = {
+  prefix: string
+  body: string
+  description?: string
+}
 
 function createCompletionItem(snippet: Snippet, detail?: string, kind?: number) {
   const snippetCompletion = new CompletionItem(snippet.prefix)

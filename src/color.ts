@@ -17,8 +17,9 @@ import {
   hexToColor,
   hslaToColor,
   nameToColor,
+  ColorConversionFunction,
+  RGBA,
 } from './utils'
-import type { ColorConversionFunction, RGBA } from './typings'
 import regex from './resources/regex'
 
 export default class ColorProvider {

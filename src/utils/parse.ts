@@ -1,6 +1,10 @@
 import { TextDocument, Position } from 'vscode'
-import { Delimiters } from '../typings'
 import regex from '../resources/regex'
+
+type Delimiters = {
+  open: string
+  close: string
+}
 
 /**
  * Recursively match nested delimiters.
@@ -8,9 +12,11 @@ import regex from '../resources/regex'
  * Adapted from https://blog.stevenlevithan.com/archives/javascript-match-nested
  *
  * @param delimiters - 2-character pair of delimiters
+ * @returns the matched text
  */
 export function matchRecursive(matchString: string, delimiters: Delimiters): string {
-  const iterator = new RegExp(`${delimiters.open}|${delimiters.close}`, 'g')
+  const { open, close } = delimiters
+  const iterator = new RegExp(`\\${open}|\\${close}`, 'g')
 
   let openTokens = 0
   let matchStartIndex
