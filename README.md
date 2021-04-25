@@ -25,13 +25,13 @@
 
 ---
 
-<img src="https://markdown-gifs.s3.eu-west-2.amazonaws.com/syntax-highlighting.gif" id="syntax-highlighting">
-<img src="https://markdown-gifs.s3.eu-west-2.amazonaws.com/formatter.gif" id="formatter">
-<img src="https://markdown-gifs.s3.eu-west-2.amazonaws.com/snippet.gif" id="snippets">
-<img src="https://markdown-gifs.s3.eu-west-2.amazonaws.com/css-completion.gif" id="css-completions">
-<img src="https://markdown-gifs.s3.eu-west-2.amazonaws.com/tag-completion.gif" id="tag-completions">
-<img src="https://markdown-gifs.s3.eu-west-2.amazonaws.com/attr-completion.gif" id="attr-completions">
-<img src="https://markdown-gifs.s3.eu-west-2.amazonaws.com/color-provider.gif" id="color-provider">
+<img src="images/syntax-highlighting.gif" id="syntax-highlighting">
+<img src="images/formatter.gif" id="formatter">
+<img src="images/snippet.gif" id="snippets">
+<img src="images/css-completion.gif" id="css-completions">
+<img src="images/tag-completion.gif" id="tag-completions">
+<img src="images/attr-completion.gif" id="attr-completions">
+<img src="images/color-provider.gif" id="color-provider">
 
 ---
 
