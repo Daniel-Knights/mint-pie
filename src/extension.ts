@@ -1,10 +1,18 @@
-import { ExtensionContext } from 'vscode'
+import { ExtensionContext, workspace } from 'vscode'
 import CompletionProvider from './completion'
 import ColorProvider from './color'
 import FormattingProvider from './format'
 
 export function activate(context: ExtensionContext): void {
-  new CompletionProvider(context.subscriptions)
+  const workspaceConfig = workspace.getConfiguration('mint-pie')
+
+  if (workspaceConfig.enableCompletions) {
+    new CompletionProvider(context.subscriptions)
+  }
+
+  if (workspaceConfig.enableFormatter) {
+    new FormattingProvider(context.subscriptions)
+  }
+
   new ColorProvider(context.subscriptions)
-  new FormattingProvider(context.subscriptions)
 }

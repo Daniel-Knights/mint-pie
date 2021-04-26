@@ -58,6 +58,23 @@
         "language": "mint",
         "path": "./snippets/mint.json"
       }
+    ],
+    "configuration": [
+      {
+        "title": "Mint Pie",
+        "properties": {
+          "mint-pie.enableCompletions": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable code completion suggestions."
+          },
+          "mint-pie.enableFormatter": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable code formatting."
+          }
+        }
+      }
     ]
   },
   "scripts": {

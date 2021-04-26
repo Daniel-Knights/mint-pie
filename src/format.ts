@@ -11,6 +11,7 @@ import { spawnSync } from 'child_process'
 import { readFileSync, writeFileSync } from 'fs'
 import { tmpdir } from 'os'
 import { normalize, join } from 'path'
+import { getWorkspaceConfig } from './utils'
 
 export default class FormattingProvider {
   constructor(subscriptions: Disposable[]) {
@@ -29,6 +30,8 @@ export default class FormattingProvider {
    * https://github.com/mint-lang/mint-vscode/blob/master/src/formatter.ts
    */
   private formatter(document: TextDocument) {
+    if (!getWorkspaceConfig().enableFormatter) return
+
     const rootPath = workspace.workspaceFolders && workspace.workspaceFolders[0].uri.path
     const tempFile = normalize(join(tmpdir(), 'temp.mint'))
 
