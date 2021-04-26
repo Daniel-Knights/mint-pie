@@ -75,6 +75,68 @@
           }
         }
       }
+    ],
+    "commands": [
+      {
+        "command": "mint-pie.build",
+        "title": "Build the project for production",
+        "category": "Mint"
+      },
+      {
+        "command": "mint-pie.clean",
+        "title": "Remove artifacts (directories) created by Mint",
+        "category": "Mint"
+      },
+      {
+        "command": "mint-pie.compile",
+        "title": "Compile the project into a single JavaScript file",
+        "category": "Mint"
+      },
+      {
+        "command": "mint-pie.docs",
+        "title": "Start the documentation server",
+        "category": "Mint"
+      },
+      {
+        "command": "mint-pie.format",
+        "title": "Format source files",
+        "category": "Mint"
+      },
+      {
+        "command": "mint-pie.init",
+        "title": "Initialize a new project",
+        "category": "Mint"
+      },
+      {
+        "command": "mint-pie.install",
+        "title": "Install dependencies",
+        "category": "Mint"
+      },
+      {
+        "command": "mint-pie.loc",
+        "title": "Count lines of code",
+        "category": "Mint"
+      },
+      {
+        "command": "mint-pie.ls",
+        "title": "Start the language server",
+        "category": "Mint"
+      },
+      {
+        "command": "mint-pie.start",
+        "title": "Start the development server",
+        "category": "Mint"
+      },
+      {
+        "command": "mint-pie.test",
+        "title": "Run tests",
+        "category": "Mint"
+      },
+      {
+        "command": "mint-pie.version",
+        "title": "Show current Mint version",
+        "category": "Mint"
+      }
     ]
   },
   "scripts": {
