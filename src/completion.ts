@@ -16,7 +16,7 @@ import {
   hasExistingHyphen,
 } from './utils/parse'
 import { tagAttributes, cssProperties, htmlTags } from './snippets'
-import { getWorkspaceConfig } from './utils'
+import { workspaceConfig } from './extension'
 
 type Snippet = {
   prefix: string
@@ -54,7 +54,7 @@ export default class CompletionProvider {
   }
 
   private attributeCompletions(document: TextDocument, position: Position) {
-    if (!getWorkspaceConfig().enableCompletions) return
+    if (!workspaceConfig.enableCompletions) return
     if (!isWithinTags(document, position, false)) return
 
     return tagAttributes.map((attr) => {
@@ -67,7 +67,7 @@ export default class CompletionProvider {
   }
 
   private cssPropertyCompletions(document: TextDocument, position: Position) {
-    if (!getWorkspaceConfig().enableCompletions) return
+    if (!workspaceConfig.enableCompletions) return
     if (!isWithinStyleBlock(document, position)) return
 
     const { text: lineText } = document.lineAt(position)
@@ -92,7 +92,7 @@ export default class CompletionProvider {
   }
 
   private cssValueCompletions(document: TextDocument, position: Position) {
-    if (!getWorkspaceConfig().enableCompletions) return
+    if (!workspaceConfig.enableCompletions) return
 
     const snippetCompletions: ProviderResult<CompletionItem[] | CompletionList> = []
     const range = document.getWordRangeAtPosition(position, /(?:\w|-)*:\s[^;]*;/)
@@ -120,7 +120,7 @@ export default class CompletionProvider {
   }
 
   private htmlTagCompletions(document: TextDocument, position: Position) {
-    if (!getWorkspaceConfig().enableCompletions) return
+    if (!workspaceConfig.enableCompletions) return
     if (!isWithinHtmlBlock(document, position)) return
     if (isWithinTags(document, position, false)) return
 
