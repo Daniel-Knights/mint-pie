@@ -21,7 +21,15 @@
 **_Coming soon_**
 
 - Linting
-- Hover providers/popups
+- Hover providers/tooltips
+
+---
+
+## Credits
+
+Parts of this extension have been adapted from or inspired by [the official extension](https://github.com/mint-lang/mint-vscode).
+
+HSLA color functions adapted from [this Gist](https://gist.github.com/mjackson/5311256).
 
 ---
 
