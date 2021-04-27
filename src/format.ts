@@ -25,6 +25,8 @@ export default class FormattingProvider {
   /**
    * Creates a temporary file, formats the code there using Mint's
    * built-in formatter and then replaces the actual file's content.
+   *
+   * Adapted from https://github.com/mint-lang/mint-vscode/blob/master/src/formatter.ts
    */
   private formatter(document: TextDocument) {
     if (!workspaceConfig.enableFormatter) return

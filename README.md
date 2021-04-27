@@ -31,6 +31,8 @@ Parts of this extension have been adapted from or inspired by [the official exte
 
 HSLA color functions adapted from [this Gist](https://gist.github.com/mjackson/5311256).
 
+Some features adapted from [VSCode's internal language extensions](https://github.com/microsoft/vscode).
+
 ---
 
 Contributions welcome!

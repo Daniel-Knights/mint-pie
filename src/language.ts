@@ -1,5 +1,9 @@
 import { Disposable, IndentAction, languages } from 'vscode'
+import regex from './resources/regex'
 
+const { increaseIndentPattern, decreaseIndentPattern, wordPattern } = regex
+
+// Adapted from https://tinyurl.com/u8274e3x
 export default class LanguageConfig {
   constructor(subscriptions: Disposable[]) {
     subscriptions.push(this.configDisposable)
@@ -9,11 +13,8 @@ export default class LanguageConfig {
     'area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr'
 
   private configDisposable = languages.setLanguageConfiguration('mint', {
-    indentationRules: {
-      increaseIndentPattern: /<(?!\?|(?:area|base|br|col|frame|hr|html|img|input|keygen|link|menuitem|meta|param|source|track|wbr)\b|[^>]*\/>)([-_\.A-Za-z0-9]+)(?=\s|>)\b[^>]*>(?!.*<\/\1>)|<!--(?!.*-->)|\{[^}"']*$/,
-      decreaseIndentPattern: /^\s*(<\/(?!html)[-_\.A-Za-z0-9]+\b[^>]*>|-->|\})/,
-    },
-    wordPattern: /(-?\d*\.\d\w*)|([^\`\~\!\@\$\^\&\*\(\)\=\+\[\{\]\}\\\|\;\:\'\"\,\.\<\>\/\s]+)/g,
+    indentationRules: { increaseIndentPattern, decreaseIndentPattern },
+    wordPattern,
     onEnterRules: [
       {
         beforeText: new RegExp(
