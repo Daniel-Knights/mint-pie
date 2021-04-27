@@ -3,6 +3,7 @@ import CompletionProvider from './completion'
 import ColorProvider from './color'
 import FormattingProvider from './format'
 import Commands from './commands'
+import LanguageConfig from './language'
 
 export let workspaceConfig = workspace.getConfiguration('mint-pie')
 
@@ -19,6 +20,7 @@ export function activate(context: ExtensionContext): void {
     new FormattingProvider(context.subscriptions)
   }
 
-  new Commands()
+  new LanguageConfig(context.subscriptions)
   new ColorProvider(context.subscriptions)
+  new Commands()
 }
