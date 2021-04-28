@@ -2,7 +2,7 @@
   "name": "mint-pie",
   "displayName": "Mint Pie",
   "description": "Mint language support for VSCode",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "icon": "images/piecon.png",
   "publisher": "DanielKnights",
