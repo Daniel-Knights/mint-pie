@@ -1,9 +1,8 @@
 import { commands, ShellExecution, Task, tasks, TaskScope, window } from 'vscode'
 
 function runMintCommandAsTask(subcommand: string) {
-  const definition = { command: '', type: '' }
   const execution = new ShellExecution(`mint ${subcommand}`)
-  const task = new Task(definition, TaskScope.Workspace, '', '', execution)
+  const task = new Task({ type: '' }, TaskScope.Workspace, subcommand, 'mint', execution)
 
   tasks.executeTask(task)
 }

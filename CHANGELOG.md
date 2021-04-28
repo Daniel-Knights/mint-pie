@@ -2,8 +2,12 @@
 
 All notable changes to the "mint-pie" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+Each release follows SemVer
 
-## [Unreleased]
+## 0.0.2 28/04/2021
+
+- Fix commands
+
+## 0.0.1 28/04/2021
 
 - Initial release
