@@ -2,9 +2,10 @@
   "name": "mint-pie",
   "displayName": "Mint Pie",
   "description": "Mint language support for VSCode",
+  "version": "0.0.1",
   "license": "MIT",
   "icon": "images/piecon.png",
-  "publisher": "Daniel-Knights",
+  "publisher": "DanielKnights",
   "author": {
     "email": "danknights95@gmail.com",
     "name": "Daniel Knights",
@@ -17,7 +18,6 @@
   "bugs": {
     "url": "https://github.com/Daniel-Knights/mint-pie/issues"
   },
-  "version": "0.0.2",
   "engines": {
     "vscode": "^1.46.0"
   },
