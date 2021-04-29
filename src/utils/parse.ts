@@ -168,29 +168,3 @@ export function isWithinStyleBlock(document: TextDocument, position: Position): 
     close: '}',
   })
 }
-
-/**
- * Determines if the current line already contains a section of the given text before a hyphen.
- *
- * e.g. if we type this: `background-c` and focus away before selecting a completion,
- * the provider will autocomplete `background-background-color` without making this determination.
- */
-export function hasExistingHyphen(
-  document: TextDocument,
-  position: Position,
-  body: string
-): string {
-  const range = document.getWordRangeAtPosition(position, /(?:\w|-)+\w*/)
-  const typedText = document.getText(range)
-
-  if (!typedText || !range) return body
-
-  const typedTextAtLastHyphen = typedText.slice(0, typedText.lastIndexOf('-') + 1)
-  const matchingLengthBody = body.slice(0, typedText.lastIndexOf('-') + 1)
-
-  if (typedTextAtLastHyphen === matchingLengthBody) {
-    return body.slice(typedText.lastIndexOf('-') + 1)
-  }
-
-  return body
-}

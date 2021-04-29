@@ -9,12 +9,7 @@ import {
   Position,
   TextDocument,
 } from 'vscode'
-import {
-  isWithinStyleBlock,
-  isWithinHtmlBlock,
-  isWithinTags,
-  hasExistingHyphen,
-} from './utils/parse'
+import { isWithinStyleBlock, isWithinHtmlBlock, isWithinTags } from './utils/parse'
 import { tagAttributes, cssProperties, htmlTags } from './snippets'
 import { workspaceConfig } from './extension'
 
@@ -60,8 +55,6 @@ export default class CompletionProvider {
     return tagAttributes.map((attr) => {
       const attrCopy = { ...attr }
 
-      attrCopy.body = hasExistingHyphen(document, position, attr.body)
-
       return createCompletionItem(attrCopy)
     })
   }
@@ -77,9 +70,6 @@ export default class CompletionProvider {
 
     return cssProperties.map((prop) => {
       const propCopy = { ...prop }
-
-      propCopy.body = hasExistingHyphen(document, position, prop.body)
-
       const snippetCompletion = createCompletionItem(propCopy, '(CSS)')
 
       snippetCompletion.command = {
@@ -108,8 +98,7 @@ export default class CompletionProvider {
       if (!bodyRegex.test(typedText) || !prop.values) return
 
       prop.values.forEach((val) => {
-        const propBody = addSemi ? val + ';' : val
-        const body = hasExistingHyphen(document, position, propBody)
+        const body = addSemi ? val + ';' : val
         const completionItem = createCompletionItem({ prefix: val, body }, '', 11)
 
         snippetCompletions.push(completionItem)
