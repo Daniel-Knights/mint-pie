@@ -12,4 +12,10 @@ export default {
   decreaseIndentPattern: /^\s*(<\/(?!html)[-_\.A-Za-z0-9]+\b[^>]*>|-->|\})/,
   wordPattern: /(-?\d*\.\d\w*)|([^`~!@$^&*()=+[{\]}\\|;:'",.<>/\s]+)/g,
   stringOrComment: /\/\*[\s\S]*\*\/|"(?:[^"]|\\")*(?<!\\)"/g,
+  interpolation: /#{[a-zA-Z0-9\.(,) ]*}/,
+
+  /* Sub-sections */
+  type: '(?::\\s*[A-Z][a-z0-9A-Z(,):. ]*\\s*)?',
+  untilLocalKeyword: '[\\s\\S]*?(?=property|state|get|fun|const|connect)',
+  funParens: '(?:\\([^){]*\\)\\s*)?',
 }

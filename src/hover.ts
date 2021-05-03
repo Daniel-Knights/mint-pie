@@ -1,9 +1,10 @@
 import { Disposable, languages, Position, TextDocument } from 'vscode'
+import regex from './resources/regex'
 import { parseAndProvideHover, parseBlockAndProvideHover } from './utils'
 
 /** SEARCH LOCALSCOPE, IF NOT, SEARCH EXPOSING, IF NOT, SEARCH GLOBAL */
 /** WHAT IF MULTIPLE GLOBAL DEFINITIONS IN SAME FILE */
-/** WHAT IF LINE WRAPS - CHECK FOR KEYWORD AS TERMINATOR INSTEAD OF NEWLINE? */
+/** INTERPOLATION */
 
 // global scope = ['global\\s+component', 'component', 'module', 'store', 'record', 'enum',]
 // local scope = ['property', 'state', 'style', 'fun', 'const', 'get']
@@ -29,8 +30,8 @@ export default class HoverProvider {
 
   private provideStyleHover(document: TextDocument, position: Position) {
     return parseBlockAndProvideHover(document, position, /(?<=::)[a-z][a-zA-Z0-9]*/, {
-      start: 'style\\s+',
-      end: '\\s*(?:\\([^){]*\\)\\s*)?(?={)',
+      start: '\\bstyle\\b\\s+',
+      end: `\\s*${regex.funParens}(?={)`,
     })
   }
 
@@ -40,8 +41,8 @@ export default class HoverProvider {
       position,
       /(?<!fun\s|[a-zA-Z0-9\.<])[a-z][a-zA-Z0-9]*(?![=a-zA-Z0-9])/,
       {
-        start: 'fun\\s+',
-        end: '\\s*(?:\\([^){]*\\)\\s*)?(?::\\s*[A-Z][a-z]*\\s*)?(?={)',
+        start: '\\bfun\\b\\s+',
+        end: `\\s*${regex.funParens}${regex.type}(?={)`,
       }
     )
   }
@@ -52,8 +53,8 @@ export default class HoverProvider {
       position,
       /(?<!get\s|[a-zA-Z0-9\.<])[a-z][a-zA-Z0-9]*(?![=a-zA-Z0-9])/,
       {
-        start: 'get\\s+',
-        end: '\\s*(?:\\:\\s*[a-zA-Z0-9(), ]*\\s*)?(?={)',
+        start: '\\bget\\b\\s+',
+        end: `\\s*${regex.type}(?={)`,
       }
     )
   }
@@ -64,9 +65,8 @@ export default class HoverProvider {
       position,
       /(?<!property\s|state\s|[a-zA-Z0-9\.<])[a-z][a-zA-Z0-9]*(?![=a-zA-Z0-9])/,
       {
-        start: '(?:property\\s+|state\\s+)',
-        end:
-          '(?:\\:\\s*[a-zA-Z0-9(), ]*\\s*)?[\\s\\S]*?(?=property|state|get|fun|const|connect)',
+        start: '\\b(?:property|state)\\b\\s+',
+        end: `${regex.type}${regex.untilLocalKeyword}`,
       }
     )
   }
@@ -75,10 +75,10 @@ export default class HoverProvider {
     return parseAndProvideHover(
       document,
       position,
-      /(?<!const\s|[a-zA-Z0-9\.<:]):?[A-Z0-9_]+(?![=a-zA-Z0-9\._])/,
+      /(?<!const\s|[a-zA-Z0-9\.<]|[^:]:)[A-Z0-9_]+(?![=a-zA-Z0-9\._])(?!:)/,
       {
-        start: 'const\\s+',
-        end: '\\s*=[\\s\\S]*?(?=property|state|get|fun|const|connect)',
+        start: '\\bconst\\b\\s+',
+        end: `\\s*=${regex.untilLocalKeyword}`,
       }
     )
   }

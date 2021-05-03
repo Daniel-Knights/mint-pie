@@ -22,7 +22,7 @@ function getRegexFromRange(
 
   const typedText = document.getText(range)
 
-  return new RegExp(`${searchRegex.start}${typedText}${searchRegex.end}`)
+  return new RegExp(`${searchRegex.start}\\b${typedText}\\b${searchRegex.end}`)
 }
 
 export function parseAndProvideHover(
