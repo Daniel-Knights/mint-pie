@@ -17,11 +17,12 @@
 - Commands
 - Configurable options
 - Color widgets
+- Hover providers/tooltips
 
 **_Coming soon_**
 
 - Linting
-- Hover providers/tooltips
+- Definitions
 
 ---
 

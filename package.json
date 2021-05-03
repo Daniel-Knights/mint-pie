@@ -72,6 +72,11 @@
             "type": "boolean",
             "default": true,
             "description": "Enable code formatting."
+          },
+          "mint-pie.enableHovers": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable hover tooltips."
           }
         }
       }

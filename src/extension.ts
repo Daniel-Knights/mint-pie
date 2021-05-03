@@ -1,9 +1,11 @@
 import { ExtensionContext, workspace } from 'vscode'
+
 import CompletionProvider from './completion'
-import ColorProvider from './color'
 import FormattingProvider from './format'
-import Commands from './commands'
+import HoverProvider from './hover'
 import LanguageConfig from './language'
+import ColorProvider from './color'
+import Commands from './commands'
 
 export let workspaceConfig = workspace.getConfiguration('mint-pie')
 
@@ -12,15 +14,14 @@ workspace.onDidChangeConfiguration(() => {
 })
 
 export function activate(context: ExtensionContext): void {
-  if (workspaceConfig.enableCompletions) {
-    new CompletionProvider(context.subscriptions)
-  }
+  const { enableCompletions, enableFormatter, enableHovers } = workspaceConfig
+  const { subscriptions } = context
 
-  if (workspaceConfig.enableFormatter) {
-    new FormattingProvider(context.subscriptions)
-  }
+  enableCompletions && new CompletionProvider(subscriptions)
+  enableFormatter && new FormattingProvider(subscriptions)
+  enableHovers && new HoverProvider(subscriptions)
 
-  new LanguageConfig(context.subscriptions)
-  new ColorProvider(context.subscriptions)
+  new LanguageConfig(subscriptions)
+  new ColorProvider(subscriptions)
   new Commands()
 }

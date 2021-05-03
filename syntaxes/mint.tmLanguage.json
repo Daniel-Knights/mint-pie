@@ -375,7 +375,7 @@
           "name": "keyword.operator.expression.of.mint"
         },
         {
-          "match": "(?<=\\s\\bfun\\b\\s)[^\\(|:|{]*",
+          "match": "(?<=(?:\\s|^)\\bfun\\b\\s)[^\\(|:|{]*",
           "name": "entity.name.function.mint"
         },
         {

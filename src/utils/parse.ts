@@ -1,9 +1,9 @@
 import { TextDocument, Position } from 'vscode'
 import regex from '../resources/regex'
 
-type Delimiters = {
-  open: string
-  close: string
+export type Delimiters = {
+  start: string
+  end: string
 }
 
 /**
@@ -11,19 +11,19 @@ type Delimiters = {
  *
  * Adapted from https://blog.stevenlevithan.com/archives/javascript-match-nested
  *
- * @param delimiters - 2-character pair of delimiters
+ * @param delimiters - `{ start: string, end: string }`
  * @returns the matched text
  */
 export function matchRecursive(matchString: string, delimiters: Delimiters): string {
-  const { open, close } = delimiters
-  const iterator = new RegExp(`\\${open}|\\${close}`, 'g')
+  const { start, end } = delimiters
+  const iterator = new RegExp(`\\${start}|\\${end}`, 'g')
 
   let openTokens = 0
   let matchStartIndex
   let match
 
   while ((match = iterator.exec(matchString))) {
-    if (match[0] === delimiters.open) {
+    if (match[0] === delimiters.start) {
       if (!openTokens) {
         matchStartIndex = iterator.lastIndex
       }
@@ -90,7 +90,7 @@ export function isWithinMultilineDelimiters(
   carvedDocText.shift()
 
   const blockMatches = carvedDocText.map((section) => {
-    const matchText = `${delimiters.open}${section}${delimiters.close}}`
+    const matchText = `${delimiters.start}${section}${delimiters.end}}`
 
     return matchRecursive(matchText, delimiters)
   })
@@ -154,8 +154,8 @@ export function isWithinTags(
  */
 export function isWithinHtmlBlock(document: TextDocument, position: Position): boolean {
   return isWithinMultilineDelimiters(document, position, regex.htmlFunOpening, {
-    open: '{',
-    close: '}',
+    start: '{',
+    end: '}',
   })
 }
 
@@ -164,7 +164,7 @@ export function isWithinHtmlBlock(document: TextDocument, position: Position): b
  */
 export function isWithinStyleBlock(document: TextDocument, position: Position): boolean {
   return isWithinMultilineDelimiters(document, position, regex.styleBlockOpening, {
-    open: '{',
-    close: '}',
+    start: '{',
+    end: '}',
   })
 }
